@@ -14,6 +14,9 @@ namespace JraVanCsharp
 {
     public partial class frmMain : Form
     {
+        // JVOpen:総ダウンロードファイル数
+        private int lDownloadCount;
+
         public frmMain()
         {
             InitializeComponent();
@@ -49,6 +52,14 @@ namespace JraVanCsharp
             int lReturnCode;
             try
             {
+                // 進捗表示初期設定
+                // タイマー停止
+                tmrDownload.Enabled = false;
+                // JVData ダウンロード進捗
+                prgDownload.Value = 0;
+                // JVData 読み込み進捗
+                prgJVRead.Value = 0;
+
                 // 引数設定
                 // JVOpen:ファイル識別子
                 string strDataSpec = "RACE";
@@ -59,8 +70,6 @@ namespace JraVanCsharp
 
                 // JVLink 戻り値
                 int lReadCount = 0;
-                // JVOpen: 総ダウンロードファイル数
-                int lDownloadCount = 0;
                 // JVOpen: 最新ファイルのタイムスタンプ
                 string strLastFileTimestamp;
 
@@ -81,6 +90,21 @@ namespace JraVanCsharp
                         + "ダウンロードファイル数 : " + lDownloadCount + "\n"
                         + "タイムスタンプ : " + strLastFileTimestamp);
 
+                    // 進捗表示プログレスバー最大値設定
+                    if (lDownloadCount == 0)
+                    {
+                        // ダウンロード必要無し
+                        prgDownload.Maximum = 100;
+                        prgDownload.Value = 100;
+                    }
+                    else
+                    {
+                        prgDownload.Maximum = lDownloadCount;
+                        // タイマー開始
+                        tmrDownload.Enabled = true;
+                    }
+                    prgJVRead.Maximum = lReadCount;
+
                     if (lReadCount > 0)
                     {
                         // JVRead: データ格納バッファサイズ
@@ -94,6 +118,9 @@ namespace JraVanCsharp
 
                         while (true)
                         {
+                            // バックグラウンドでの処理を実行
+                            Application.DoEvents();
+
                             // JVRead で1行読み込み
                             lReturnCode = axJVLink1.JVRead(out strBuff, out lBuffSize, out strFileName);
                             // リターンコードにより処理を分枝
@@ -101,9 +128,13 @@ namespace JraVanCsharp
                             {
                                 // 全ファイル読み込み終了
                                 case 0:
+                                    // 進捗表示
+                                    prgJVRead.Value = prgJVRead.Maximum;
                                     goto readFinish;
                                 // ファイル切り替わり
                                 case -1:
+                                    prgJVRead.Value = prgJVRead.Value + 1;
+                                    continue;
                                 // ダウンロード中
                                 case -3:
                                     continue;
@@ -143,8 +174,16 @@ namespace JraVanCsharp
                                     break;
                             }
                         }
-                    readFinish:;
+                        readFinish:;
                     }
+
+                    // タイマ有効時は、無効化する
+                    if (tmrDownload.Enabled)
+                    {
+                        tmrDownload.Enabled = false;
+                        prgDownload.Value = prgDownload.Maximum;
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -158,6 +197,41 @@ namespace JraVanCsharp
             if (lReturnCode != 0)
             {
                 MessageBox.Show("JVClose エラー：" + lReturnCode);
+            }
+        }
+
+        private void tmrDownload_Tick(object sender, EventArgs e)
+        {
+            // ダウンロード済のファイル数を返す
+            int lReturnCode = axJVLink1.JVStatus();
+            // エラー判定
+            if (lReturnCode < 0)
+            {
+                // エラー
+
+                MessageBox.Show("JVStatusエラー:" + lReturnCode);
+                // タイマー停止
+                tmrDownload.Enabled = false;
+                // JVLink終了処理
+                lReturnCode = axJVLink1.JVClose();
+                if (lReturnCode != 0)
+                {
+                    MessageBox.Show("JVCloseエラー:" + lReturnCode);
+                }
+            }
+            else if (lReturnCode < lDownloadCount)
+            {
+                // ダウンロード中
+                // プログレス表示
+                prgDownload.Value = lReturnCode;
+            }
+            else if (lReturnCode == lDownloadCount)
+            {
+                // ダウンロード完了
+                // タイマー停止
+                tmrDownload.Enabled = false;
+                // プログレス表示
+                prgDownload.Value = lReturnCode;
             }
         }
     }

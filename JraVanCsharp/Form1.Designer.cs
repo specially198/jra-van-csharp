@@ -29,6 +29,7 @@ namespace JraVanCsharp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.axJVLink1 = new AxJVDTLabLib.AxJVLink();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -36,6 +37,9 @@ namespace JraVanCsharp
             this.mnuConfJV = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGetJVData = new System.Windows.Forms.Button();
             this.rtbData = new System.Windows.Forms.RichTextBox();
+            this.prgDownload = new System.Windows.Forms.ProgressBar();
+            this.prgJVRead = new System.Windows.Forms.ProgressBar();
+            this.tmrDownload = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axJVLink1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -95,11 +99,32 @@ namespace JraVanCsharp
             this.rtbData.Text = "";
             this.rtbData.WordWrap = false;
             // 
+            // prgDownload
+            // 
+            this.prgDownload.Location = new System.Drawing.Point(205, 56);
+            this.prgDownload.Name = "prgDownload";
+            this.prgDownload.Size = new System.Drawing.Size(566, 31);
+            this.prgDownload.TabIndex = 4;
+            // 
+            // prgJVRead
+            // 
+            this.prgJVRead.Location = new System.Drawing.Point(205, 106);
+            this.prgJVRead.Name = "prgJVRead";
+            this.prgJVRead.Size = new System.Drawing.Size(566, 28);
+            this.prgJVRead.TabIndex = 5;
+            // 
+            // tmrDownload
+            // 
+            this.tmrDownload.Interval = 500;
+            this.tmrDownload.Tick += new System.EventHandler(this.tmrDownload_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.prgJVRead);
+            this.Controls.Add(this.prgDownload);
             this.Controls.Add(this.rtbData);
             this.Controls.Add(this.btnGetJVData);
             this.Controls.Add(this.axJVLink1);
@@ -124,6 +149,9 @@ namespace JraVanCsharp
         private System.Windows.Forms.ToolStripMenuItem mnuConfJV;
         private System.Windows.Forms.Button btnGetJVData;
         private System.Windows.Forms.RichTextBox rtbData;
+        private System.Windows.Forms.ProgressBar prgDownload;
+        private System.Windows.Forms.ProgressBar prgJVRead;
+        private System.Windows.Forms.Timer tmrDownload;
     }
 }
 
