@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace JraVanCsharp
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
+        }
+
+        private void mnuConfJV_Click(object sender, EventArgs e)
+        {
+            // 設定画面表示
+            long lReturnCode = axJVLink1.JVSetUIProperties();
+            if (lReturnCode != 0)
+            {
+                MessageBox.Show("JVSetUIPropertiesエラー コード：" + lReturnCode);
+            }
         }
     }
 }
