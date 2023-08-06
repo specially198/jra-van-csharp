@@ -35,6 +35,7 @@ namespace JraVanCsharp
             this.mnuConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuConfJV = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGetJVData = new System.Windows.Forms.Button();
+            this.rtbData = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.axJVLink1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -85,11 +86,21 @@ namespace JraVanCsharp
             this.btnGetJVData.UseVisualStyleBackColor = true;
             this.btnGetJVData.Click += new System.EventHandler(this.btnGetJVData_Click);
             // 
+            // rtbData
+            // 
+            this.rtbData.Location = new System.Drawing.Point(21, 152);
+            this.rtbData.Name = "rtbData";
+            this.rtbData.Size = new System.Drawing.Size(750, 270);
+            this.rtbData.TabIndex = 3;
+            this.rtbData.Text = "";
+            this.rtbData.WordWrap = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.rtbData);
             this.Controls.Add(this.btnGetJVData);
             this.Controls.Add(this.axJVLink1);
             this.Controls.Add(this.menuStrip1);
@@ -112,6 +123,7 @@ namespace JraVanCsharp
         private System.Windows.Forms.ToolStripMenuItem mnuConfig;
         private System.Windows.Forms.ToolStripMenuItem mnuConfJV;
         private System.Windows.Forms.Button btnGetJVData;
+        private System.Windows.Forms.RichTextBox rtbData;
     }
 }
 
