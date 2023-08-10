@@ -327,7 +327,7 @@ public static class JVData_Struct
             FukaSyokinSyogai = MidB2S(ref bBuff, 35, 10);
             ChakuKaisuHeichi.SetDataB(MidB2B(ref bBuff, 45, 36));
             ChakuKaisuSyogai.SetDataB(MidB2B(ref bBuff, 81, 36));
-            
+
             for (i = 0; i < 20; i++)
             {
                 ChakuKaisuJyo[i].SetDataB(MidB2B(ref bBuff, 117 + (36 * i), 36));
@@ -429,7 +429,7 @@ public static class JVData_Struct
         public void SetDataB(byte[] bBuff)
         {
             Initialize();
-            
+
             for (int i = 0; i < 6; i++)
             {
                 ChakuKaisu[i] = MidB2S(ref bBuff, 1 + (3 * i), 3);
@@ -544,7 +544,7 @@ public static class JVData_Struct
             SyubetuCD = MidB2S(ref bBuff, 1, 2);
             KigoCD = MidB2S(ref bBuff, 3, 3);
             JyuryoCD = MidB2S(ref bBuff, 6, 1);
-            
+
             for (int i = 0; i < 5; i++)
             {
                 JyokenCD[i] = MidB2S(ref bBuff, 7 + (3 * i), 3);
@@ -1955,8 +1955,8 @@ public static class JVData_Struct
         // データセット
         public void SetDataB(byte[] bBuff)
         {
-            HansyokuNum = MidB2S(ref bBuff, 1, 8);
-            Bamei = MidB2S(ref bBuff, 9, 36);
+            HansyokuNum = MidB2S(ref bBuff, 1, 10);
+            Bamei = MidB2S(ref bBuff, 11, 36);
         }
     }
 
@@ -2039,7 +2039,7 @@ public static class JVData_Struct
         {
             Initialize();
             int i;
-            byte[] bBuff = new byte[1577];
+            byte[] bBuff = new byte[1609];
             bBuff = Str2Byte(ref strBuff);
 
             head.SetDataB(MidB2B(ref bBuff, 1, 11));
@@ -2060,46 +2060,45 @@ public static class JVData_Struct
 
             for (i = 0; i < 14; i++)
             {
-                Ketto3Info[i].SetDataB(MidB2B(ref bBuff, 205 + (44 * i), 44));
+                Ketto3Info[i].SetDataB(MidB2B(ref bBuff, 205 + (46 * i), 46));
             }
-
-            TozaiCD = MidB2S(ref bBuff, 821, 1);
-            ChokyosiCode = MidB2S(ref bBuff, 822, 5);
-            ChokyosiRyakusyo = MidB2S(ref bBuff, 827, 8);
-            Syotai = MidB2S(ref bBuff, 835, 20);
-            BreederCode = MidB2S(ref bBuff, 855, 6);
-            BreederName = MidB2S(ref bBuff, 861, 70);
-            SanchiName = MidB2S(ref bBuff, 931, 20);
-            BanusiCode = MidB2S(ref bBuff, 951, 6);
-            BanusiName = MidB2S(ref bBuff, 957, 64);
-            RuikeiHonsyoHeiti = MidB2S(ref bBuff, 1021, 9);
-            RuikeiHonsyoSyogai = MidB2S(ref bBuff, 1030, 9);
-            RuikeiFukaHeichi = MidB2S(ref bBuff, 1039, 9);
-            RuikeiFukaSyogai = MidB2S(ref bBuff, 1048, 9);
-            RuikeiSyutokuHeichi = MidB2S(ref bBuff, 1057, 9);
-            RuikeiSyutokuSyogai = MidB2S(ref bBuff, 1066, 9);
-            ChakuSogo.SetDataB(MidB2B(ref bBuff, 1075, 18));
-            ChakuChuo.SetDataB(MidB2B(ref bBuff, 1093, 18));
+            TozaiCD = MidB2S(ref bBuff, 849, 1);
+            ChokyosiCode = MidB2S(ref bBuff, 850, 5);
+            ChokyosiRyakusyo = MidB2S(ref bBuff, 855, 8);
+            Syotai = MidB2S(ref bBuff, 863, 20);
+            BreederCode = MidB2S(ref bBuff, 883, 8);
+            BreederName = MidB2S(ref bBuff, 891, 72);
+            SanchiName = MidB2S(ref bBuff, 963, 20);
+            BanusiCode = MidB2S(ref bBuff, 983, 6);
+            BanusiName = MidB2S(ref bBuff, 989, 64);
+            RuikeiHonsyoHeiti = MidB2S(ref bBuff, 1053, 9);
+            RuikeiHonsyoSyogai = MidB2S(ref bBuff, 1062, 9);
+            RuikeiFukaHeichi = MidB2S(ref bBuff, 1071, 9);
+            RuikeiFukaSyogai = MidB2S(ref bBuff, 1080, 9);
+            RuikeiSyutokuHeichi = MidB2S(ref bBuff, 1089, 9);
+            RuikeiSyutokuSyogai = MidB2S(ref bBuff, 1098, 9);
+            ChakuSogo.SetDataB(MidB2B(ref bBuff, 1107, 18));
+            ChakuChuo.SetDataB(MidB2B(ref bBuff, 1125, 18));
 
             for (i = 0; i < 7; i++)
             {
-                ChakuKaisuBa[i].SetDataB(MidB2B(ref bBuff, 1111 + (18 * i), 18));
+                ChakuKaisuBa[i].SetDataB(MidB2B(ref bBuff, 1143 + (18 * i), 18));
             }
             for (i = 0; i < 12; i++)
             {
-                ChakuKaisuJyotai[i].SetDataB(MidB2B(ref bBuff, 1237 + (18 * i), 18));
+                ChakuKaisuJyotai[i].SetDataB(MidB2B(ref bBuff, 1269 + (18 * i), 18));
             }
             for (i = 0; i < 6; i++)
             {
-                ChakuKaisuKyori[i].SetDataB(MidB2B(ref bBuff, 1453 + (18 * i), 18));
+                ChakuKaisuKyori[i].SetDataB(MidB2B(ref bBuff, 1485 + (18 * i), 18));
             }
             for (i = 0; i < 4; i++)
             {
-                Kyakusitu[i] = MidB2S(ref bBuff, 1561 + (3 * i), 3);
+                Kyakusitu[i] = MidB2S(ref bBuff, 1593 + (3 * i), 3);
             }
 
-            RaceCount = MidB2S(ref bBuff, 1573, 3);
-            crlf = MidB2S(ref bBuff, 1576, 2);
+            RaceCount = MidB2S(ref bBuff, 1605, 3);
+            crlf = MidB2S(ref bBuff, 1608, 2);
             bBuff = null;
         }
     }
@@ -2355,23 +2354,23 @@ public static class JVData_Struct
         public void SetDataB(ref string strBuff)
         {
             Initialize();
-            byte[] bBuff = new byte[537];
+            byte[] bBuff = new byte[545];
             bBuff = Str2Byte(ref strBuff);
 
             head.SetDataB(MidB2B(ref bBuff, 1, 11));
-            BreederCode = MidB2S(ref bBuff, 12, 6);
-            BreederName_Co = MidB2S(ref bBuff, 18, 70);
-            BreederName = MidB2S(ref bBuff, 88, 70);
-            BreederNameKana = MidB2S(ref bBuff, 158, 70);
-            BreederNameEng = MidB2S(ref bBuff, 228, 168);
-            Address = MidB2S(ref bBuff, 396, 20);
+            BreederCode = MidB2S(ref bBuff, 12, 8);
+            BreederName_Co = MidB2S(ref bBuff, 20, 72);
+            BreederName = MidB2S(ref bBuff, 92, 72);
+            BreederNameKana = MidB2S(ref bBuff, 164, 72);
+            BreederNameEng = MidB2S(ref bBuff, 236, 168);
+            Address = MidB2S(ref bBuff, 404, 20);
 
             for (int i = 0; i < 2; i++)
             {
-                HonRuikei[i].SetDataB(MidB2B(ref bBuff, 416 + (60 * i), 60));
+                HonRuikei[i].SetDataB(MidB2B(ref bBuff, 424 + (60 * i), 60));
             }
 
-            crlf = MidB2S(ref bBuff, 536, 2);
+            crlf = MidB2S(ref bBuff, 544, 2);
             bBuff = null;
         }
     }
@@ -2463,27 +2462,27 @@ public static class JVData_Struct
         // データセット
         public void SetDataB(ref string strBuff)
         {
-            byte[] bBuff = new byte[245];
+            byte[] bBuff = new byte[251];
             bBuff = Str2Byte(ref strBuff);
 
             head.SetDataB(MidB2B(ref bBuff, 1, 11));
-            HansyokuNum = MidB2S(ref bBuff, 12, 8);
-            reserved = MidB2S(ref bBuff, 20, 8);
-            KettoNum = MidB2S(ref bBuff, 28, 10);
-            DelKubun = MidB2S(ref bBuff, 38, 1);
-            Bamei = MidB2S(ref bBuff, 39, 36);
-            BameiKana = MidB2S(ref bBuff, 75, 40);
-            BameiEng = MidB2S(ref bBuff, 115, 80);
-            BirthYear = MidB2S(ref bBuff, 195, 4);
-            SexCD = MidB2S(ref bBuff, 199, 1);
-            HinsyuCD = MidB2S(ref bBuff, 200, 1);
-            KeiroCD = MidB2S(ref bBuff, 201, 2);
-            HansyokuMochiKubun = MidB2S(ref bBuff, 203, 1);
-            ImportYear = MidB2S(ref bBuff, 204, 4);
-            SanchiName = MidB2S(ref bBuff, 208, 20);
-            HansyokuFNum = MidB2S(ref bBuff, 228, 8);
-            HansyokuMNum = MidB2S(ref bBuff, 236, 8);
-            crlf = MidB2S(ref bBuff, 244, 2);
+            HansyokuNum = MidB2S(ref bBuff, 12, 10);
+            reserved = MidB2S(ref bBuff, 22, 8);
+            KettoNum = MidB2S(ref bBuff, 30, 10);
+            DelKubun = MidB2S(ref bBuff, 40, 1);
+            Bamei = MidB2S(ref bBuff, 41, 36);
+            BameiKana = MidB2S(ref bBuff, 77, 40);
+            BameiEng = MidB2S(ref bBuff, 117, 80);
+            BirthYear = MidB2S(ref bBuff, 197, 4);
+            SexCD = MidB2S(ref bBuff, 201, 1);
+            HinsyuCD = MidB2S(ref bBuff, 202, 1);
+            KeiroCD = MidB2S(ref bBuff, 203, 2);
+            HansyokuMochiKubun = MidB2S(ref bBuff, 205, 1);
+            ImportYear = MidB2S(ref bBuff, 206, 4);
+            SanchiName = MidB2S(ref bBuff, 210, 20);
+            HansyokuFNum = MidB2S(ref bBuff, 230, 10);
+            HansyokuMNum = MidB2S(ref bBuff, 240, 10);
+            crlf = MidB2S(ref bBuff, 250, 2);
             bBuff = null;
         }
     }
@@ -2524,7 +2523,7 @@ public static class JVData_Struct
         public void SetDataB(ref string strBuff)
         {
             Initialize();
-            byte[] bBuff = new byte[178];
+            byte[] bBuff = new byte[208];
             bBuff = Str2Byte(ref strBuff);
 
             head.SetDataB(MidB2B(ref bBuff, 1, 11));
@@ -2535,15 +2534,15 @@ public static class JVData_Struct
             KeiroCD = MidB2S(ref bBuff, 32, 2);
             SankuMochiKubun = MidB2S(ref bBuff, 34, 1);
             ImportYear = MidB2S(ref bBuff, 35, 4);
-            BreederCode = MidB2S(ref bBuff, 39, 6);
-            SanchiName = MidB2S(ref bBuff, 45, 20);
+            BreederCode = MidB2S(ref bBuff, 39, 8);
+            SanchiName = MidB2S(ref bBuff, 47, 20);
 
             for (int i = 0; i < 14; i++)
             {
-                HansyokuNum[i] = MidB2S(ref bBuff, 65 + (8 * i), 8);
+                HansyokuNum[i] = MidB2S(ref bBuff, 67 + (10 * i), 10);
             }
 
-            crlf = MidB2S(ref bBuff, 177, 2);
+            crlf = MidB2S(ref bBuff, 207, 2);
             bBuff = null;
         }
     }
@@ -3150,22 +3149,22 @@ public static class JVData_Struct
         // データセット
         public void SetDataB(ref string strBuff)
         {
-            byte[] bBuff = new byte[196];
+            byte[] bBuff = new byte[200];
             bBuff = Str2Byte(ref strBuff);
 
             head.SetDataB(MidB2B(ref bBuff, 1, 11));
             KettoNum = MidB2S(ref bBuff, 12, 10);
-            HansyokuFNum = MidB2S(ref bBuff, 22, 8);
-            HansyokuMNum = MidB2S(ref bBuff, 30, 8);
-            BirthYear = MidB2S(ref bBuff, 38, 4);
-            SaleCode = MidB2S(ref bBuff, 42, 6);
-            SaleHostName = MidB2S(ref bBuff, 48, 40);
-            SaleName = MidB2S(ref bBuff, 88, 80);
-            FromDate.SetDataB(MidB2B(ref bBuff, 168, 8));
-            ToDate.SetDataB(MidB2B(ref bBuff, 176, 8));
-            Barei = MidB2S(ref bBuff, 184, 1);
-            Price = MidB2S(ref bBuff, 185, 10);
-            crlf = MidB2S(ref bBuff, 195, 2);
+            HansyokuFNum = MidB2S(ref bBuff, 22, 10);
+            HansyokuMNum = MidB2S(ref bBuff, 32, 10);
+            BirthYear = MidB2S(ref bBuff, 42, 4);
+            SaleCode = MidB2S(ref bBuff, 46, 6);
+            SaleHostName = MidB2S(ref bBuff, 52, 40);
+            SaleName = MidB2S(ref bBuff, 92, 80);
+            FromDate.SetDataB(MidB2B(ref bBuff, 172, 8));
+            ToDate.SetDataB(MidB2B(ref bBuff, 180, 8));
+            Barei = MidB2S(ref bBuff, 188, 1);
+            Price = MidB2S(ref bBuff, 189, 10);
+            crlf = MidB2S(ref bBuff, 199, 2);
             bBuff = null;
         }
     }
@@ -3496,13 +3495,13 @@ public static class JVData_Struct
         public void SetDataB(byte[] bBuff)
         {
             Initialize();
-            BreederCode = MidB2S(ref bBuff, 1, 6);
-            BreederName_Co = MidB2S(ref bBuff, 7, 70);
-            BreederName = MidB2S(ref bBuff, 77, 70);
+            BreederCode = MidB2S(ref bBuff, 1, 8);
+            BreederName_Co = MidB2S(ref bBuff, 9, 72);
+            BreederName = MidB2S(ref bBuff, 81, 72);
 
             for (int i = 0; i < 2; i++)
             {
-                HonRuikei[i].SetDataB(MidB2B(ref bBuff, 147 + (60 * i), 60));
+                HonRuikei[i].SetDataB(MidB2B(ref bBuff, 153 + (60 * i), 60));
             }
         }
     }
@@ -3521,7 +3520,7 @@ public static class JVData_Struct
         // データセット
         public void SetDataB(ref string strBuff)
         {
-            byte[] bBuff = new byte[6864];
+            byte[] bBuff = new byte[6870];
             bBuff = Str2Byte(ref strBuff);
 
             head.SetDataB(MidB2B(ref bBuff, 1, 11));
@@ -3531,7 +3530,7 @@ public static class JVData_Struct
             ChokyoChaku.SetDataB(MidB2B(ref bBuff, 3864, 2479));
             BanusiChaku.SetDataB(MidB2B(ref bBuff, 6343, 254));
             BreederChaku.SetDataB(MidB2B(ref bBuff, 6597, 266));
-            crlf = MidB2S(ref bBuff, 6863, 2);
+            crlf = MidB2S(ref bBuff, 6869, 2);
             bBuff = null;
         }
     }
@@ -3554,15 +3553,15 @@ public static class JVData_Struct
         // データセット
         public void SetDataB(ref string strBuff)
         {
-            byte[] bBuff = new byte[6887];
+            byte[] bBuff = new byte[6889];
             bBuff = Str2Byte(ref strBuff);
 
             head.SetDataB(MidB2B(ref bBuff, 1, 11));
-            HansyokuNum = MidB2S(ref bBuff, 12, 8);
-            KeitoId = MidB2S(ref bBuff, 20, 30);
-            KeitoName = MidB2S(ref bBuff, 50, 36);
-            KeitoEx = MidB2S(ref bBuff, 86, 6800);
-            crlf = MidB2S(ref bBuff, 6886, 2);
+            HansyokuNum = MidB2S(ref bBuff, 12, 10);
+            KeitoId = MidB2S(ref bBuff, 22, 30);
+            KeitoName = MidB2S(ref bBuff, 52, 36);
+            KeitoEx = MidB2S(ref bBuff, 88, 6800);
+            crlf = MidB2S(ref bBuff, 6888, 2);
             bBuff = null;
         }
     }
@@ -3612,8 +3611,8 @@ public static class JVData_Struct
     {
         public string Umaban;     // 馬番
         public string TMScore;    // 予測スコア
-        
-        
+
+
         // データセット
         public void SetDataB(byte[] bBuff)
         {
@@ -3688,8 +3687,8 @@ public static class JVData_Struct
     public struct WF_YUKO_HYO_INFO
     {
         public string Yuko_Hyo;     // 有効票数
-        
-        
+
+
         // データセット
         public void SetDataB(byte[] bBuff)
         {
@@ -3705,8 +3704,8 @@ public static class JVData_Struct
         public string Kumiban;      // 組番
         public string Pay;          // 重勝式払戻金
         public string Tekichu_Hyo;  // 的中票数
-        
-        
+
+
         // データセット
         public void SetDataB(byte[] bBuff)
         {
@@ -3771,7 +3770,7 @@ public static class JVData_Struct
             TekichunashiFlag = MidB2S(ref bBuff, 136, 1);
             COShoki = MidB2S(ref bBuff, 137, 15);
             COZanDaka = MidB2S(ref bBuff, 152, 15);
-            
+
             for (int i = 0; i < 243; i++)
             {
                 WFPayInfo[i].SetDataB(MidB2B(ref bBuff, 167 + (29 * i), 29));
