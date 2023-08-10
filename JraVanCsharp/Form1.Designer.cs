@@ -1,17 +1,16 @@
-﻿
-namespace JraVanCsharp
+﻿namespace JraVanCsharp
 {
     partial class frmMain
     {
         /// <summary>
-        /// 必要なデザイナー変数です。
+        ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 使用中のリソースをすべてクリーンアップします。
+        ///  Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">マネージド リソースを破棄する場合は true を指定し、その他の場合は false を指定します。</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,137 +20,118 @@ namespace JraVanCsharp
             base.Dispose(disposing);
         }
 
-        #region Windows フォーム デザイナーで生成されたコード
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// デザイナー サポートに必要なメソッドです。このメソッドの内容を
-        /// コード エディターで変更しないでください。
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.axJVLink1 = new AxJVDTLabLib.AxJVLink();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.mnuConfig = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuConfJV = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnGetJVData = new System.Windows.Forms.Button();
-            this.rtbData = new System.Windows.Forms.RichTextBox();
-            this.prgDownload = new System.Windows.Forms.ProgressBar();
-            this.prgJVRead = new System.Windows.Forms.ProgressBar();
-            this.tmrDownload = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.axJVLink1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // axJVLink1
-            // 
-            this.axJVLink1.Enabled = true;
-            this.axJVLink1.Location = new System.Drawing.Point(645, 230);
-            this.axJVLink1.Name = "axJVLink1";
-            this.axJVLink1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axJVLink1.OcxState")));
-            this.axJVLink1.Size = new System.Drawing.Size(384, 384);
-            this.axJVLink1.TabIndex = 0;
+            components = new System.ComponentModel.Container();
+            menuStrip1 = new MenuStrip();
+            mnuConfig = new ToolStripMenuItem();
+            mnuConfJV = new ToolStripMenuItem();
+            btnGetJVData = new Button();
+            rtbData = new RichTextBox();
+            prgDownload = new ProgressBar();
+            prgJVRead = new ProgressBar();
+            tmrDownload = new System.Windows.Forms.Timer(components);
+            menuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuConfig});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 40);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.ImageScalingSize = new Size(32, 32);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { mnuConfig });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 40);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // mnuConfig
             // 
-            this.mnuConfig.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuConfJV});
-            this.mnuConfig.Name = "mnuConfig";
-            this.mnuConfig.Size = new System.Drawing.Size(112, 36);
-            this.mnuConfig.Text = "設定(&C)";
+            mnuConfig.DropDownItems.AddRange(new ToolStripItem[] { mnuConfJV });
+            mnuConfig.Name = "mnuConfig";
+            mnuConfig.Size = new Size(111, 36);
+            mnuConfig.Text = "設定(&C)";
             // 
             // mnuConfJV
             // 
-            this.mnuConfJV.Name = "mnuConfJV";
-            this.mnuConfJV.Size = new System.Drawing.Size(359, 44);
-            this.mnuConfJV.Text = "JV-Link の設定(&J)...";
-            this.mnuConfJV.Click += new System.EventHandler(this.mnuConfJV_Click);
+            mnuConfJV.Name = "mnuConfJV";
+            mnuConfJV.Size = new Size(336, 44);
+            mnuConfJV.Text = "JV-Link の設定(&J)...";
+            mnuConfJV.Click += mnuConfJV_Click;
             // 
             // btnGetJVData
             // 
-            this.btnGetJVData.Location = new System.Drawing.Point(21, 56);
-            this.btnGetJVData.Name = "btnGetJVData";
-            this.btnGetJVData.Size = new System.Drawing.Size(157, 79);
-            this.btnGetJVData.TabIndex = 2;
-            this.btnGetJVData.Text = "データ取得";
-            this.btnGetJVData.UseVisualStyleBackColor = true;
-            this.btnGetJVData.Click += new System.EventHandler(this.btnGetJVData_Click);
+            btnGetJVData.Location = new Point(23, 42);
+            btnGetJVData.Name = "btnGetJVData";
+            btnGetJVData.Size = new Size(150, 70);
+            btnGetJVData.TabIndex = 1;
+            btnGetJVData.Text = "データ取得";
+            btnGetJVData.UseVisualStyleBackColor = true;
+            btnGetJVData.Click += btnGetJVData_Click;
             // 
             // rtbData
             // 
-            this.rtbData.Location = new System.Drawing.Point(21, 152);
-            this.rtbData.Name = "rtbData";
-            this.rtbData.Size = new System.Drawing.Size(750, 270);
-            this.rtbData.TabIndex = 3;
-            this.rtbData.Text = "";
-            this.rtbData.WordWrap = false;
+            rtbData.Location = new Point(25, 146);
+            rtbData.Name = "rtbData";
+            rtbData.Size = new Size(748, 292);
+            rtbData.TabIndex = 2;
+            rtbData.Text = "";
+            rtbData.WordWrap = false;
             // 
             // prgDownload
             // 
-            this.prgDownload.Location = new System.Drawing.Point(205, 56);
-            this.prgDownload.Name = "prgDownload";
-            this.prgDownload.Size = new System.Drawing.Size(566, 31);
-            this.prgDownload.TabIndex = 4;
+            prgDownload.Location = new Point(183, 42);
+            prgDownload.Name = "prgDownload";
+            prgDownload.Size = new Size(590, 34);
+            prgDownload.TabIndex = 3;
             // 
             // prgJVRead
             // 
-            this.prgJVRead.Location = new System.Drawing.Point(205, 106);
-            this.prgJVRead.Name = "prgJVRead";
-            this.prgJVRead.Size = new System.Drawing.Size(566, 28);
-            this.prgJVRead.TabIndex = 5;
+            prgJVRead.Location = new Point(183, 94);
+            prgJVRead.Name = "prgJVRead";
+            prgJVRead.Size = new Size(590, 36);
+            prgJVRead.TabIndex = 4;
             // 
             // tmrDownload
             // 
-            this.tmrDownload.Interval = 500;
-            this.tmrDownload.Tick += new System.EventHandler(this.tmrDownload_Tick);
+            tmrDownload.Interval = 500;
+            tmrDownload.Tick += tmrDownload_Tick;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.prgJVRead);
-            this.Controls.Add(this.prgDownload);
-            this.Controls.Add(this.rtbData);
-            this.Controls.Add(this.btnGetJVData);
-            this.Controls.Add(this.axJVLink1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "frmMain";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.axJVLink1)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(prgJVRead);
+            Controls.Add(prgDownload);
+            Controls.Add(rtbData);
+            Controls.Add(btnGetJVData);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
+            Name = "frmMain";
+            Text = "Form1";
+            Load += frmMain_Load;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private AxJVDTLabLib.AxJVLink axJVLink1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mnuConfig;
-        private System.Windows.Forms.ToolStripMenuItem mnuConfJV;
-        private System.Windows.Forms.Button btnGetJVData;
-        private System.Windows.Forms.RichTextBox rtbData;
-        private System.Windows.Forms.ProgressBar prgDownload;
-        private System.Windows.Forms.ProgressBar prgJVRead;
+        private JVDTLabLib.JVLinkClass axJVLink1 = new JVDTLabLib.JVLinkClass();
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem mnuConfig;
+        private ToolStripMenuItem mnuConfJV;
+        private Button btnGetJVData;
+        private RichTextBox rtbData;
+        private ProgressBar prgDownload;
+        private ProgressBar prgJVRead;
         private System.Windows.Forms.Timer tmrDownload;
     }
 }
-

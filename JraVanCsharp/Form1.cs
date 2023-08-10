@@ -1,20 +1,11 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static JVData_Struct;
 
 namespace JraVanCsharp
 {
     public partial class frmMain : Form
     {
-        // JVOpen:ç·ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«æ•°
+        // JVOpen:‘ƒ_ƒEƒ“ƒ[ƒhƒtƒ@ƒCƒ‹”
         private int lDownloadCount;
 
         public frmMain()
@@ -24,26 +15,26 @@ namespace JraVanCsharp
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // å¼•æ•°è¨­å®š
+            // ˆø”İ’è
             string sid = "Test";
 
-            // JVLink åˆæœŸåŒ–
+            // JVLink ‰Šú‰»
             int lReturnCode = axJVLink1.JVInit(sid);
 
-            // ã‚¨ãƒ©ãƒ¼åˆ¤å®š
+            // ƒGƒ‰[”»’è
             if (lReturnCode != 0)
             {
-                MessageBox.Show("JVInit ã‚¨ãƒ©ãƒ¼ ã‚³ãƒ¼ãƒ‰ï¼š" + lReturnCode);
+                MessageBox.Show("JVInit ƒGƒ‰[ ƒR[ƒhF" + lReturnCode);
             }
         }
 
         private void mnuConfJV_Click(object sender, EventArgs e)
         {
-            // è¨­å®šç”»é¢è¡¨ç¤º
+            // İ’è‰æ–Ê•\¦
             long lReturnCode = axJVLink1.JVSetUIProperties();
             if (lReturnCode != 0)
             {
-                MessageBox.Show("JVSetUIPropertiesã‚¨ãƒ©ãƒ¼ ã‚³ãƒ¼ãƒ‰ï¼š" + lReturnCode);
+                MessageBox.Show("JVSetUIPropertiesƒGƒ‰[ ƒR[ƒhF" + lReturnCode);
             }
         }
 
@@ -52,138 +43,137 @@ namespace JraVanCsharp
             int lReturnCode;
             try
             {
-                // é€²æ—è¡¨ç¤ºåˆæœŸè¨­å®š
-                // ã‚¿ã‚¤ãƒãƒ¼åœæ­¢
+                // i’»•\¦‰Šúİ’è
+                // ƒ^ƒCƒ}[’â~
                 tmrDownload.Enabled = false;
-                // JVData ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰é€²æ—
+                // JVData ƒ_ƒEƒ“ƒ[ƒhi’»
                 prgDownload.Value = 0;
-                // JVData èª­ã¿è¾¼ã¿é€²æ—
+                // JVData “Ç‚İ‚İi’»
                 prgJVRead.Value = 0;
 
-                // å¼•æ•°è¨­å®š
-                // JVOpen:ãƒ•ã‚¡ã‚¤ãƒ«è­˜åˆ¥å­
+                // ˆø”İ’è
+                // JVOpen:ƒtƒ@ƒCƒ‹¯•Êq
                 string strDataSpec = "RACE";
-                // JVOpen:ãƒ‡ãƒ¼ã‚¿æä¾›æ—¥ä»˜
+                // JVOpen:ƒf[ƒ^’ñ‹Ÿ“ú•t
                 string strFromTime = "20050301000000";
-                // JVOpen:ã‚ªãƒ—ã‚·ãƒ§ãƒ³
+                // JVOpen:ƒIƒvƒVƒ‡ƒ“
                 int lOption = 2;
 
-                // JVLink æˆ»ã‚Šå€¤
+                // JVLink –ß‚è’l
                 int lReadCount = 0;
-                // JVOpen: æœ€æ–°ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—
+                // JVOpen: ÅVƒtƒ@ƒCƒ‹‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv
                 string strLastFileTimestamp;
 
-                // JVLink ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å‡¦ç†
+                // JVLink ƒ_ƒEƒ“ƒ[ƒhˆ—
                 lReturnCode = axJVLink1.JVOpen(
                     strDataSpec, strFromTime, lOption, ref lReadCount, ref lDownloadCount, out strLastFileTimestamp);
 
-                // ã‚¨ãƒ©ãƒ¼åˆ¤å®š
+                // ƒGƒ‰[”»’è
                 if (lReturnCode != 0)
                 {
-                    MessageBox.Show("JVOpen ã‚¨ãƒ©ãƒ¼ï¼š" + lReturnCode);
+                    MessageBox.Show("JVOpen ƒGƒ‰[F" + lReturnCode);
                 }
                 else
                 {
                     MessageBox.Show(
-                        "æˆ»ã‚Šå€¤ : " + lReturnCode + "\n"
-                        + "èª­ã¿è¾¼ã¿ãƒ•ã‚¡ã‚¤ãƒ«æ•° : " + lReadCount + "\n"
-                        + "ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«æ•° : " + lDownloadCount + "\n"
-                        + "ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ— : " + strLastFileTimestamp);
+                        "–ß‚è’l : " + lReturnCode + "\n"
+                        + "“Ç‚İ‚İƒtƒ@ƒCƒ‹” : " + lReadCount + "\n"
+                        + "ƒ_ƒEƒ“ƒ[ƒhƒtƒ@ƒCƒ‹” : " + lDownloadCount + "\n"
+                        + "ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv : " + strLastFileTimestamp);
 
-                    // é€²æ—è¡¨ç¤ºãƒ—ãƒ­ã‚°ãƒ¬ã‚¹ãƒãƒ¼æœ€å¤§å€¤è¨­å®š
+                    // i’»•\¦ƒvƒƒOƒŒƒXƒo[Å‘å’lİ’è
                     if (lDownloadCount == 0)
                     {
-                        // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å¿…è¦ç„¡ã—
+                        // ƒ_ƒEƒ“ƒ[ƒh•K—v–³‚µ
                         prgDownload.Maximum = 100;
                         prgDownload.Value = 100;
                     }
                     else
                     {
                         prgDownload.Maximum = lDownloadCount;
-                        // ã‚¿ã‚¤ãƒãƒ¼é–‹å§‹
+                        // ƒ^ƒCƒ}[ŠJn
                         tmrDownload.Enabled = true;
                     }
                     prgJVRead.Maximum = lReadCount;
 
                     if (lReadCount > 0)
                     {
-                        // JVRead: ãƒ‡ãƒ¼ã‚¿æ ¼ç´ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º
+                        // JVRead: ƒf[ƒ^Ši”[ƒoƒbƒtƒ@ƒTƒCƒY
                         int lBuffSize = 110000;
-                        // JVRead: ãƒ‡ãƒ¼ã‚¿æ ¼ç´ãƒãƒƒãƒ•ã‚¡
+                        // JVRead: ƒf[ƒ^Ši”[ƒoƒbƒtƒ@
                         string strBuff;
-                        // JVRead: ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ«å
+                        // JVRead: ƒ_ƒEƒ“ƒ[ƒhƒtƒ@ƒCƒ‹–¼
                         string strFileName;
-                        // ãƒ¬ãƒ¼ã‚¹è©³ç´°æƒ…å ±æ§‹é€ ä½“
+                        // ƒŒ[ƒXÚ×î•ñ\‘¢‘Ì
                         JV_RA_RACE RaceInfo = new JV_RA_RACE();
 
                         while (true)
                         {
-                            // ãƒãƒƒã‚¯ã‚°ãƒ©ã‚¦ãƒ³ãƒ‰ã§ã®å‡¦ç†ã‚’å®Ÿè¡Œ
+                            // ƒoƒbƒNƒOƒ‰ƒEƒ“ƒh‚Å‚Ìˆ—‚ğÀs
                             Application.DoEvents();
 
-                            // JVRead ã§1è¡Œèª­ã¿è¾¼ã¿
+                            // JVRead ‚Å1s“Ç‚İ‚İ
                             lReturnCode = axJVLink1.JVRead(out strBuff, out lBuffSize, out strFileName);
-                            // ãƒªã‚¿ãƒ¼ãƒ³ã‚³ãƒ¼ãƒ‰ã«ã‚ˆã‚Šå‡¦ç†ã‚’åˆ†æ
+                            // ƒŠƒ^[ƒ“ƒR[ƒh‚É‚æ‚èˆ—‚ğ•ª}
                             switch (lReturnCode)
                             {
-                                // å…¨ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿çµ‚äº†
+                                // ‘Sƒtƒ@ƒCƒ‹“Ç‚İ‚İI—¹
                                 case 0:
-                                    // é€²æ—è¡¨ç¤º
+                                    // i’»•\¦
                                     prgJVRead.Value = prgJVRead.Maximum;
                                     goto readFinish;
-                                // ãƒ•ã‚¡ã‚¤ãƒ«åˆ‡ã‚Šæ›¿ã‚ã‚Š
+                                // ƒtƒ@ƒCƒ‹Ø‚è‘Ö‚í‚è
                                 case -1:
                                     prgJVRead.Value = prgJVRead.Value + 1;
                                     continue;
-                                // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­
+                                // ƒ_ƒEƒ“ƒ[ƒh’†
                                 case -3:
                                     continue;
-                                // Init ã•ã‚Œã¦ãªã„
+                                // Init ‚³‚ê‚Ä‚È‚¢
                                 case -201:
-                                    MessageBox.Show("JVInit ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
+                                    MessageBox.Show("JVInit ‚ªs‚í‚ê‚Ä‚¢‚Ü‚¹‚ñB");
                                     goto readFinish;
-                                // Open ã•ã‚Œã¦ãªã„
+                                // Open ‚³‚ê‚Ä‚È‚¢
                                 case -203:
-                                    MessageBox.Show("JVOpen ãŒè¡Œã‚ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
+                                    MessageBox.Show("JVOpen ‚ªs‚í‚ê‚Ä‚¢‚Ü‚¹‚ñB");
                                     goto readFinish;
-                                // ãƒ•ã‚¡ã‚¤ãƒ«ãŒãªã„
+                                // ƒtƒ@ƒCƒ‹‚ª‚È‚¢
                                 case -503:
-                                    MessageBox.Show(strFileName + "ãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚");
+                                    MessageBox.Show(strFileName + "‚ª‘¶İ‚µ‚Ü‚¹‚ñB");
                                     goto readFinish;
-                                // æ­£å¸¸èª­ã¿è¾¼ã¿
+                                // ³í“Ç‚İ‚İ
                                 case int i when i > 0:
-                                    // ãƒ¬ã‚³ãƒ¼ãƒ‰ç¨®åˆ¥ ID ã®è­˜åˆ¥
+                                    // ƒŒƒR[ƒhí•Ê ID ‚Ì¯•Ê
                                     if (strBuff.Substring(0, 2) == "RA")
                                     {
-                                        // ãƒ¬ãƒ¼ã‚¹è©³ç´°ã®ã¿å‡¦ç†
+                                        // ƒŒ[ƒXÚ×‚Ì‚İˆ—
 
-                                        // ãƒ¬ãƒ¼ã‚¹è©³ç´°æ§‹é€ ä½“ã¸ã®å±•é–‹
+                                        // ƒŒ[ƒXÚ×\‘¢‘Ì‚Ö‚Ì“WŠJ
                                         RaceInfo.SetDataB(ref strBuff);
-                                        // ãƒ‡ãƒ¼ã‚¿è¡¨ç¤º
+                                        // ƒf[ƒ^•\¦
                                         rtbData.AppendText(
-                                            "å¹´:" + RaceInfo.id.Year
-                                            + " æœˆæ—¥:" + RaceInfo.id.MonthDay
-                                            + " å ´:" + RaceInfo.id.JyoCD
-                                            + " å›æ¬¡:" + RaceInfo.id.Kaiji
-                                            + " æ—¥æ¬¡:" + RaceInfo.id.Nichiji
-                                            + " ï¼²:" + RaceInfo.id.RaceNum
-                                            + " ãƒ¬ãƒ¼ã‚¹å:" + RaceInfo.RaceInfo.Ryakusyo10 + "\n");
+                                            "”N:" + RaceInfo.id.Year
+                                            + " Œ“ú:" + RaceInfo.id.MonthDay
+                                            + " ê:" + RaceInfo.id.JyoCD
+                                            + " ‰ñŸ:" + RaceInfo.id.Kaiji
+                                            + " “úŸ:" + RaceInfo.id.Nichiji
+                                            + " ‚q:" + RaceInfo.id.RaceNum
+                                            + " ƒŒ[ƒX–¼:" + RaceInfo.RaceInfo.Ryakusyo10 + "\n");
                                     }
                                     break;
                                 default:
                                     break;
                             }
                         }
-                        readFinish:;
+                    readFinish:;
                     }
 
-                    // ã‚¿ã‚¤ãƒæœ‰åŠ¹æ™‚ã¯ã€ç„¡åŠ¹åŒ–ã™ã‚‹
+                    // ƒ^ƒCƒ}—LŒø‚ÍA–³Œø‰»‚·‚é
                     if (tmrDownload.Enabled)
                     {
                         tmrDownload.Enabled = false;
                         prgDownload.Value = prgDownload.Maximum;
                     }
-
                 }
             }
             catch (Exception ex)
@@ -192,45 +182,45 @@ namespace JraVanCsharp
                 return;
             }
 
-            // JVLink çµ‚äº†å‡¦ç†
+            // JVLink I—¹ˆ—
             lReturnCode = axJVLink1.JVClose();
             if (lReturnCode != 0)
             {
-                MessageBox.Show("JVClose ã‚¨ãƒ©ãƒ¼ï¼š" + lReturnCode);
+                MessageBox.Show("JVClose ƒGƒ‰[F" + lReturnCode);
             }
         }
 
         private void tmrDownload_Tick(object sender, EventArgs e)
         {
-            // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰æ¸ˆã®ãƒ•ã‚¡ã‚¤ãƒ«æ•°ã‚’è¿”ã™
+            // ƒ_ƒEƒ“ƒ[ƒhÏ‚Ìƒtƒ@ƒCƒ‹”‚ğ•Ô‚·
             int lReturnCode = axJVLink1.JVStatus();
-            // ã‚¨ãƒ©ãƒ¼åˆ¤å®š
+            // ƒGƒ‰[”»’è
             if (lReturnCode < 0)
             {
-                // ã‚¨ãƒ©ãƒ¼
+                // ƒGƒ‰[
 
-                MessageBox.Show("JVStatusã‚¨ãƒ©ãƒ¼:" + lReturnCode);
-                // ã‚¿ã‚¤ãƒãƒ¼åœæ­¢
+                MessageBox.Show("JVStatusƒGƒ‰[:" + lReturnCode);
+                // ƒ^ƒCƒ}[’â~
                 tmrDownload.Enabled = false;
-                // JVLinkçµ‚äº†å‡¦ç†
+                // JVLinkI—¹ˆ—
                 lReturnCode = axJVLink1.JVClose();
                 if (lReturnCode != 0)
                 {
-                    MessageBox.Show("JVCloseã‚¨ãƒ©ãƒ¼:" + lReturnCode);
+                    MessageBox.Show("JVCloseƒGƒ‰[:" + lReturnCode);
                 }
             }
             else if (lReturnCode < lDownloadCount)
             {
-                // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ä¸­
-                // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹è¡¨ç¤º
+                // ƒ_ƒEƒ“ƒ[ƒh’†
+                // ƒvƒƒOƒŒƒX•\¦
                 prgDownload.Value = lReturnCode;
             }
             else if (lReturnCode == lDownloadCount)
             {
-                // ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å®Œäº†
-                // ã‚¿ã‚¤ãƒãƒ¼åœæ­¢
+                // ƒ_ƒEƒ“ƒ[ƒhŠ®—¹
+                // ƒ^ƒCƒ}[’â~
                 tmrDownload.Enabled = false;
-                // ãƒ—ãƒ­ã‚°ãƒ¬ã‚¹è¡¨ç¤º
+                // ƒvƒƒOƒŒƒX•\¦
                 prgDownload.Value = lReturnCode;
             }
         }
