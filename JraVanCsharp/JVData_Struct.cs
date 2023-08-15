@@ -59,7 +59,6 @@ public static class JVData_Struct
     /// <returns>バイト配列</returns>
     public static byte[] Str2Byte(ref string myString)
     {
-        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         // Shift JISに変換する
         return Encoding.GetEncoding("Shift_JIS").GetBytes(myString);
     }

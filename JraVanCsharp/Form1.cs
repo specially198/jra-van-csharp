@@ -7,6 +7,8 @@ namespace JraVanCsharp
     {
         // JVOpen:総ダウンロードファイル数
         private int lDownloadCount;
+        // コード変換インスタンス
+        private ClsCodeConv clsCodeConv = null!;
 
         public frmMain()
         {
@@ -26,6 +28,9 @@ namespace JraVanCsharp
             {
                 MessageBox.Show("JVInit エラー コード：" + lReturnCode);
             }
+
+            // コード変換インスタンス生成
+            clsCodeConv = new ClsCodeConv(Application.StartupPath + "/CodeTable.csv");
         }
 
         private void mnuConfJV_Click(object sender, EventArgs e)
@@ -154,11 +159,16 @@ namespace JraVanCsharp
                                         rtbData.AppendText(
                                             "年:" + RaceInfo.id.Year
                                             + " 月日:" + RaceInfo.id.MonthDay
-                                            + " 場:" + RaceInfo.id.JyoCD
+                                            + " 場:" + clsCodeConv.getCodeName("2001", RaceInfo.id.JyoCD, 3)
                                             + " 回次:" + RaceInfo.id.Kaiji
                                             + " 日次:" + RaceInfo.id.Nichiji
                                             + " Ｒ:" + RaceInfo.id.RaceNum
                                             + " レース名:" + RaceInfo.RaceInfo.Ryakusyo10 + "\n");
+                                    }
+                                    else
+                                    {
+                                        // レース詳細以外は読み飛ばす
+                                        axJVLink1.JVSkip();
                                     }
                                     break;
                                 default:
