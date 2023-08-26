@@ -1,5 +1,6 @@
-using System.Diagnostics;
+using System.Data;
 using static JVData_Struct;
+using Application = System.Windows.Forms.Application;
 
 namespace JraVanCsharp
 {
@@ -46,8 +47,12 @@ namespace JraVanCsharp
         private void btnGetJVData_Click(object sender, EventArgs e)
         {
             int lReturnCode;
+            DataSet jvdds = new DataSet("JvDatas");
             try
             {
+                // 表示ウィンドウの初期化
+                rtbData.Clear();
+
                 // 進捗表示初期設定
                 // タイマー停止
                 tmrDownload.Enabled = false;
@@ -110,7 +115,9 @@ namespace JraVanCsharp
                         // JVRead: ダウンロードファイル名
                         string strFileName;
                         // レース詳細情報構造体
-                        JV_RA_RACE RaceInfo = new JV_RA_RACE();
+                        JV_RA_RACE raceInfo = new JV_RA_RACE();
+                        // 馬毎レース情報構造体
+                        JV_SE_RACE_UMA raceUmaInfo = new JV_SE_RACE_UMA();
 
                         while (true)
                         {
@@ -154,20 +161,22 @@ namespace JraVanCsharp
                                         // レース詳細のみ処理
 
                                         // レース詳細構造体への展開
-                                        RaceInfo.SetDataB(ref strBuff);
-                                        // データ表示
-                                        rtbData.AppendText(
-                                            "年:" + RaceInfo.id.Year
-                                            + " 月日:" + RaceInfo.id.MonthDay
-                                            + " 場:" + clsCodeConv.getCodeName("2001", RaceInfo.id.JyoCD, 3)
-                                            + " 回次:" + RaceInfo.id.Kaiji
-                                            + " 日次:" + RaceInfo.id.Nichiji
-                                            + " Ｒ:" + RaceInfo.id.RaceNum
-                                            + " レース名:" + RaceInfo.RaceInfo.Ryakusyo10 + "\n");
+                                        raceInfo.SetDataB(ref strBuff);
+
+                                        // 読み込んだ情報をデータセットへ格納する
+                                        AdoUtility.SetJVDataRaceDataSet(raceInfo, ref jvdds);
+                                    }
+                                    else if (strBuff.Substring(0, 2) == "SE")
+                                    {
+                                        // 馬毎レース情報構造体への展開
+                                        raceUmaInfo.SetDataB(ref strBuff);
+
+                                        // 読み込んだ情報をデータセットへ格納する
+                                        AdoUtility.SetJVDataUmaRaceDataSet(raceUmaInfo, ref jvdds);
                                     }
                                     else
                                     {
-                                        // レース詳細以外は読み飛ばす
+                                        // レース詳細、馬毎レース情報以外は読み飛ばす
                                         axJVLink1.JVSkip();
                                     }
                                     break;
@@ -185,19 +194,87 @@ namespace JraVanCsharp
                         prgDownload.Value = prgDownload.Maximum;
                     }
                 }
+
+                // データセットに格納した各情報を画面に表示
+                DataTable dtRace = jvdds.Tables["Race"]!;
+
+                // レース詳細の件数を取得
+                var raceCount = dtRace.Rows.Count;
+
+                // レース詳細が存在しない場合
+                if (raceCount == 0)
+                {
+                    MessageBox.Show("レース情報が存在しません");
+                }
+                else
+                {
+                    // レース詳細の第10レースを検索(複数行)
+                    var races = dtRace.AsEnumerable()
+                        .Where(r => r.Field<string>("RaceNum") == "10")
+                        .ToList();
+                    if (races.Count == 0)
+                    {
+                        MessageBox.Show("検索結果が0件です");
+                        return;
+                    }
+
+                    // 取得結果の一件目を構造体にセット
+                    JV_RA_RACE raceInfo = new JV_RA_RACE();
+                    AdoUtility.SetJVDataRaceStructure(races[0], ref raceInfo);
+
+                    // 画面表示
+                    rtbData.AppendText(
+                        "年:" + raceInfo.id.Year
+                        + " 月日:" + raceInfo.id.MonthDay
+                        + " 場:" + clsCodeConv.GetCodeName("2001", raceInfo.id.JyoCD, 3)
+                        + " 回次:" + raceInfo.id.Kaiji
+                        + " 日次:" + raceInfo.id.Nichiji
+                        + " Ｒ:" + raceInfo.id.RaceNum
+                        + " レース名:" + raceInfo.RaceInfo.Ryakusyo10 + "\n");
+
+                    // 表示したレース詳細の馬毎レース情報を全馬分表示
+                    // データセットからレース詳細のキーで馬毎レース情報の行(複数行)を検索
+                    var raceUmas = jvdds.Tables["RaceUma"]!.AsEnumerable()
+                        .Where(r => r.Field<string>("Year") == raceInfo.id.Year)
+                        .Where(r => r.Field<string>("MonthDay") == raceInfo.id.MonthDay)
+                        .Where(r => r.Field<string>("JyoCD") == raceInfo.id.JyoCD)
+                        .Where(r => r.Field<string>("Kaiji") == raceInfo.id.Kaiji)
+                        .Where(r => r.Field<string>("Nichiji") == raceInfo.id.Nichiji)
+                        .Where(r => r.Field<string>("RaceNum") == raceInfo.id.RaceNum)
+                        .ToList();
+
+                    // 一行ずつ取り出し、画面に表示
+                    foreach (var raceUma in raceUmas)
+                    {
+                        // 行の情報を構造体にセット
+                        JV_SE_RACE_UMA raceUmaInfo = new JV_SE_RACE_UMA();
+                        AdoUtility.SetJVDataUmaRaceStructure(raceUma, ref raceUmaInfo);
+                        // 画面表示
+                        rtbData.AppendText(
+                            "枠:" + raceUmaInfo.Wakuban
+                            + " 馬番:" + raceUmaInfo.Umaban
+                            + " 馬名:" + raceUmaInfo.Bamei
+                            + " 騎手:" + raceUmaInfo.KisyuRyakusyo + "\n");
+                    }
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.ToString());
-                return;
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                // JVLink 終了処理
+                lReturnCode = axJVLink1.JVClose();
+                if (lReturnCode != 0)
+                {
+                    MessageBox.Show("JVClose エラー：" + lReturnCode);
+                }
             }
 
-            // JVLink 終了処理
-            lReturnCode = axJVLink1.JVClose();
-            if (lReturnCode != 0)
-            {
-                MessageBox.Show("JVClose エラー：" + lReturnCode);
-            }
+            // 後処理
+            // JV-Dataデータセットのリソース解放
+            jvdds.Dispose();
         }
 
         private void tmrDownload_Tick(object sender, EventArgs e)
