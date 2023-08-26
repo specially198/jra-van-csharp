@@ -11,10 +11,10 @@ namespace JraVanCsharp
 
         public ClsCodeConv(string fileName)
         {
-            readCsv(fileName);
+            ReadCsv(fileName);
         }
 
-        private void readCsv(string fileName)
+        private void ReadCsv(string fileName)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace JraVanCsharp
             }
         }
 
-        public string getCodeName(string codeNo, string? code, int no = 1)
+        public string GetCodeName(string codeNo, string? code, int no = 1)
         {
             CsvData csvData = csvDataDictionary[codeNo + "_" + code];
             var nameList = csvData.NameList;
